@@ -55,5 +55,5 @@ var app = new Koa();
 exports.app = app;
 app.use(router.routes());
 var port = process.env.PORT || 3000;
-app.listen(port, function () { return console.log("Listening on port " + port); });
+app.listen(port, function () { return console.log("Listening on port " + port); }); // tslint:disable-line:no-console
 //# sourceMappingURL=index.js.map
