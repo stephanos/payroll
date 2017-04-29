@@ -1,0 +1,25 @@
+{
+  "name": "se-challenge-payroll",
+  "author": "Stephan Behnke",
+  "version": "1.0.0",
+  "scripts": {
+    "init": "rimraf node_modules && cp -R /app/node_modules .",
+    "clean": "rimraf build",
+    "build": "tsc --rootDir src --sourceMap --outDir build",
+    "start": "node build/index.js",
+    "watch:build": "nodemon --watch src --ext ts --exec 'npm run build'",
+    "watch:start": "nodemon --watch build --ext js --exec 'npm run start'"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.39",
+    "@types/koa-router": "^7.0.22",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2",
+    "rimraf": "^2.6.1",
+    "typescript": "^2.3.2"
+  },
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-router": "^7.1.1"
+  }
+}
