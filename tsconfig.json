@@ -4,10 +4,12 @@
     "module": "commonjs",
     "target": "es5",
     "lib": [
-      "es5",
+      "es2015",
       "es2015.promise"
     ],
-    "strict": true
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

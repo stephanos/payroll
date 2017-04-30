@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import * as Koa from 'koa';
 import { Request } from 'koa';
 import * as Router from 'koa-router';
