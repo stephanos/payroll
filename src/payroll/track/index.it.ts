@@ -6,7 +6,7 @@ import { Parser } from './parser';
 import { Repository } from './repository';
 
 
-describe('TimeReportParser', () => {
+describe('TimeReportService', () => {
 
     let db: Database;
     let service: TimeReportService;

@@ -25,4 +25,8 @@ class TimeReportService {
 }
 
 
-export { TimeReportService };
+export {
+    ITimeReport,
+    ITimeReportEntry,
+    TimeReportService,
+};
