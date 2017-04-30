@@ -1,10 +1,10 @@
 import * as moment from 'moment';
 import * as PapaParse from 'papaparse';
 
-import { ITimeReport } from './model/timeReport';
+import { ITimeReport } from './model';
 
 
-class TimeReportParser {
+class Parser {
 
     private dateFormat = 'DD-MM-YYYY';
 
@@ -27,4 +27,4 @@ class TimeReportParser {
 }
 
 
-export { TimeReportParser };
+export { Parser };

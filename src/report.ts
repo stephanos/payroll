@@ -1,0 +1,7 @@
+class PayrollReport {
+
+
+}
+
+
+export { PayrollReport };

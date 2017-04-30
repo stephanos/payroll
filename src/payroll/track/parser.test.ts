@@ -1,10 +1,10 @@
-import { TimeReportParser } from './parser';
+import { Parser } from './parser';
 
 
 describe('TimeReportParser', () => {
 
     it('should parse valid payroll report CSV', () => {
-        const report = new TimeReportParser().parseCSV(
+        const report = new Parser().parseCSV(
 `date,hours worked,employee id,job group
 14/11/2016,7.5,1,A
 9/11/2016,4,2,B
@@ -21,7 +21,7 @@ report id,43,,`);
     });
 
     it('should parse payroll report CSV with whitespace at start and end', () => {
-        const report = new TimeReportParser().parseCSV(
+        const report = new Parser().parseCSV(
 `
 date,hours worked,employee id,job group
 10/11/2016,4,2,B
@@ -36,7 +36,7 @@ report id,43,,
     });
 
     it('should parse empty payroll report CSV', () => {
-        const report = new TimeReportParser().parseCSV(
+        const report = new Parser().parseCSV(
 `date,hours worked,employee id,job group
 report id,43,,`);
 
