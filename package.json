@@ -5,13 +5,10 @@
   "scripts": {
     "init": "rimraf node_modules && cp -R /app/node_modules .",
     "check": "npm-run-all build lint test",
-    "clean": "rimraf build",
     "lint": "tslint 'src/**/*.ts'",
-    "build": "tsc --rootDir src --sourceMap --outDir build",
-    "start": "node build/index.js",
+    "start": "ts-node src/index.ts",
     "test": "jest",
-    "watch:build": "nodemon --watch src --ext ts --exec 'npm run build'",
-    "watch:start": "nodemon --watch build --ext js --exec 'npm run start'",
+    "watch:start": "nodemon --watch src --ext ts --exec 'npm run start'",
     "watch:test": "jest --watch"
   },
   "jest": {
@@ -32,6 +29,7 @@
     "npm-run-all": "^4.0.2",
     "rimraf": "^2.6.1",
     "ts-jest": "^19.0.14",
+    "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
     "typescript": "^2.3.2"
   },
