@@ -4,24 +4,39 @@
   "version": "1.0.0",
   "scripts": {
     "init": "rimraf node_modules && cp -R /app/node_modules .",
-    "check": "npm-run-all build lint",
+    "check": "npm-run-all build lint test",
     "clean": "rimraf build",
     "lint": "tslint 'src/**/*.ts'",
     "build": "tsc --rootDir src --sourceMap --outDir build",
     "start": "node build/index.js",
+    "test": "jest",
     "watch:build": "nodemon --watch src --ext ts --exec 'npm run build'",
-    "watch:start": "nodemon --watch build --ext js --exec 'npm run start'"
+    "watch:start": "nodemon --watch build --ext js --exec 'npm run start'",
+    "watch:test": "jest --watch"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": ".*\\.(test|spec)\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
   },
   "devDependencies": {
     "@types/koa": "^2.0.39",
     "@types/koa-router": "^7.0.22",
+    "jest": "^19.0.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "rimraf": "^2.6.1",
+    "ts-jest": "^19.0.14",
     "tslint": "^5.1.0",
     "typescript": "^2.3.2"
   },
   "dependencies": {
+    "@types/jest": "^19.2.2",
     "koa": "^2.2.0",
     "koa-router": "^7.1.1"
   }
