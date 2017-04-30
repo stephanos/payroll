@@ -7,7 +7,12 @@
       "es2015",
       "es2015.promise"
     ],
-    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

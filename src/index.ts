@@ -1,25 +1,10 @@
 import 'reflect-metadata';
 
-import * as Koa from 'koa';
-import { Request } from 'koa';
-import * as Router from 'koa-router';
+import { startServer } from './http';
 
 
-const router = new Router();
-router.get('/', async (ctx, next) => {
-    await next();
-    ctx.body = 'Hello!';
-    ctx.status = 200;
+process.on('uncaughtException', (err: Error) => {
+    console.log('Caught exception: ' + err); // tslint:disable-line:no-console
 });
 
-
-const app = new Koa();
-app.use(router.routes());
-
-
-const port = process.env.PORT || 3000;
-app.listen(port,
-    () => console.log(`Listening on port ${port}`)); // tslint:disable-line:no-console
-
-
-export { app };
+startServer();
