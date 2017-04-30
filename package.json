@@ -15,7 +15,7 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": ".*\\.(test|spec)\\.(ts|tsx|js)$",
+    "testRegex": ".*\\.(test|it)\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
       "js"
@@ -28,9 +28,11 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^7.0.14",
     "@types/papaparse": "^4.1.28",
+    "@types/pg": "^6.1.39",
     "jest": "^19.0.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
+    "pgtools": "^0.2.3",
     "rimraf": "^2.6.1",
     "ts-jest": "^19.0.14",
     "ts-node": "^3.0.2",

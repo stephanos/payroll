@@ -1,18 +1,7 @@
 import * as moment from 'moment';
 import * as PapaParse from 'papaparse';
 
-
-interface ITimeReportEntry {
-    employeeId: string;
-    date: Date;
-    hoursWorked: number;
-    jobGroup: string;
-}
-
-interface ITimeReport {
-    id: number;
-    entries: ITimeReportEntry[];
-}
+import { ITimeReport } from './model/timeReport';
 
 
 class TimeReportParser {
@@ -38,8 +27,4 @@ class TimeReportParser {
 }
 
 
-export {
-    ITimeReport,
-    ITimeReportEntry,
-    TimeReportParser,
-};
+export { TimeReportParser };

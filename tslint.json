@@ -5,6 +5,7 @@
     ],
     "rules": {
         "no-consecutive-blank-lines": [true, 3],
+        "max-classes-per-file": [false],
         "quotemark": [true, "single", "avoid-escape"]
     }
 }
