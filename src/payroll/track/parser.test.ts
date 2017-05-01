@@ -40,4 +40,11 @@ report id,43,,`);
 
         expect(report).toEqual({ entries: [], id: 43 });
     });
+
+    it('should only accept valid job groups', () => {
+        expect(() => new Parser().parseCSV(
+`date,hours worked,employee id,job group
+10/11/2016,4,2,C
+report id,43,,`)).toThrowError("invalid job group 'C'");
+    });
 });
