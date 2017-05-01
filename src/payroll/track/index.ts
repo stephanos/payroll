@@ -1,32 +1,13 @@
-import { ITimeReport, ITimeReportEntry } from './model';
+import { Database } from '../../data/database';
+
 import { Parser } from './parser';
 import { Repository } from './repository';
+import { PayrollTimeTrackService } from './service';
 
 
-class TimeReportService {
+export { ITimeReport, ITimeReportEntry } from './model';
+export { PayrollTimeTrackService } from './service';
 
-    constructor(
-        public parser: Parser,
-        public repository: Repository,
-    ) {}
-
-
-    public async import(report: ITimeReport) {
-        await this.repository.save(report);
-    }
-
-    public async importCSV(csv: string) {
-        await this.import(this.parser.parseCSV(csv));
-    }
-
-    public async load(): Promise<ITimeReportEntry[]> {
-        return await this.repository.load();
-    }
+export function createPayrollTimeTrackService(db: Database) {
+    return new PayrollTimeTrackService(new Parser(), new Repository(db));
 }
-
-
-export {
-    ITimeReport,
-    ITimeReportEntry,
-    TimeReportService,
-};

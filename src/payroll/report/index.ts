@@ -1,27 +1,10 @@
-import { ITimeReportEntry } from '../track';
-
-import { IPayrollReport } from './model';
 import { Reporter } from './reporter';
+import { ITimeReportLoader, PayrollReportService } from './service';
 
 
-interface ITimeReportLoader {
-    load(): Promise<ITimeReportEntry[]>;
+export { IPayrollReport, IPayrollReportEntry } from './model';
+export { PayrollReportService } from './service';
+
+export function createPayrollReportService(timeReportLoader: ITimeReportLoader) {
+    return new PayrollReportService(timeReportLoader, new Reporter());
 }
-
-
-class PayrollService {
-
-    constructor(
-        private timeReportLoader: ITimeReportLoader,
-        private reporter: Reporter,
-    ) {}
-
-
-    public async generateReport(): Promise<IPayrollReport> {
-        const entries = await this.timeReportLoader.load();
-        return this.reporter.generate(entries);
-    }
-}
-
-
-export { PayrollService };

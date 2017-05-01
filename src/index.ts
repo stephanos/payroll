@@ -1,12 +1,15 @@
-import 'reflect-metadata';
-
+import { Database } from './data';
+import { createPayrollReportService } from './payroll/report';
+import { createPayrollTimeTrackService } from './payroll/track';
 import { Server } from './web';
 
 
-process.on('uncaughtException', (err: Error) => {
-    console.log('Caught exception: ' + err); // tslint:disable-line:no-console
-});
+function init() {
+    const db = new Database();
+    const payrollTimeTrackService = createPayrollTimeTrackService(db);
+    const payrollReportService = createPayrollReportService(payrollTimeTrackService);
+    const server = new Server(payrollTimeTrackService, payrollReportService);
+    server.start();
+}
 
-
-const server = new Server();
-server.start();
+init();

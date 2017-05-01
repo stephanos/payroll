@@ -1,22 +1,20 @@
 import { ITimeReportEntry } from '../track';
 
-import { PayrollService } from './index';
-import { Reporter } from './reporter';
+import { createPayrollReportService, PayrollReportService } from './index';
 
 
-describe('TimeReportService', () => {
+describe('PayrollReportService', () => {
 
-    let service: PayrollService;
+    let service: PayrollReportService;
     let timeReportEntries: ITimeReportEntry[] = [];
 
     beforeEach(async () => {
-        const reporter = new Reporter();
         const timeReportLoader = {
             load: async () => {
                 return timeReportEntries;
             },
         };
-        service = new PayrollService(timeReportLoader, reporter);
+        service = createPayrollReportService(timeReportLoader);
     });
 
     it('should generate pay report', async () => {

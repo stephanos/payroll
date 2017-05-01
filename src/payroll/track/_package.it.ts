@@ -1,23 +1,19 @@
 import { Database } from '../../data/database';
 import { createDB } from '../../data/test-support';
 
-import { TimeReportService } from './index';
-import { Parser } from './parser';
-import { Repository } from './repository';
+import { createPayrollTimeTrackService, PayrollTimeTrackService } from './index';
 
 
-describe('TimeReportService', () => {
+describe('PayrollTimeTrackService', () => {
 
     let db: Database;
-    let service: TimeReportService;
+    let service: PayrollTimeTrackService;
 
     beforeEach(async () => {
         db = new Database('test_' + new Date().getTime());
         await createDB(db);
 
-        const parser = new Parser();
-        const repo = new Repository(db);
-        service = new TimeReportService(parser, repo);
+        service = createPayrollTimeTrackService(db);
     });
 
     afterEach(async () => {
