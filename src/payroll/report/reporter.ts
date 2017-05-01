@@ -7,21 +7,24 @@ import { IPayrollReport, IPayrollReportEntry } from './model';
 class Reporter {
 
     public generate(timeEntries: ITimeReportEntry[]): IPayrollReport {
+        const keys = new Set();
         const payrollMap = new Map<string, IPayrollReportEntry>();
         timeEntries.forEach((timeEntry) => {
             const payment = this.paymentFor(timeEntry.hoursWorked, timeEntry.jobGroup);
             const period = this.periodFor(timeEntry.date);
-            const sortKey = `${timeEntry.employeeId}_${period.begin}`;
-            const entry: IPayrollReportEntry = payrollMap.get(sortKey) || {
+            const key = `${timeEntry.employeeId}_${period.begin.toISOString()}`;
+            const entry: IPayrollReportEntry = payrollMap.get(key) || {
                 amount: 0.0,
                 employeeId: timeEntry.employeeId,
                 payPeriod: period,
             };
             entry.amount += payment;
-            payrollMap.set(sortKey, entry);
+            payrollMap.set(key, entry);
+            keys.add(key);
         });
 
-        return { entries: Array.from(payrollMap.values()) };
+        const sortedKeys = Array.from(keys.values()).sort();
+        return { entries: sortedKeys.reduce((acc, key) => acc.concat(payrollMap.get(key)), [])};
     }
 
     private periodFor(date: Date) {
