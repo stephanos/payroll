@@ -1,38 +1,47 @@
 import 'reflect-metadata';
 
 import * as Koa from 'koa';
-import * as Router from 'koa-router';
+import * as serve from 'koa-static';
+import * as views from 'koa-views';
+import * as moment from 'moment';
 
-import { PayrollReportService } from '../payroll/report';
-import { PayrollTimeTrackService } from '../payroll/track';
+import { Router } from './router';
 
 
 class Server {
 
     constructor(
-        private track: PayrollTimeTrackService,
-        private report: PayrollReportService,
+        private router: Router,
     ) {}
 
     public async start() {
-        const app = this.createApp(this.createRouter());
+        const app = this.createApp();
         await this.startApp(app);
         return app;
     }
 
-    private createRouter() {
-        const router = new Router();
-        router.get('/', async (ctx, next) => {
-            await next();
-            ctx.body = 'Hello!';
-            ctx.status = 200;
-        });
-        return router;
-    }
-
-    private createApp(router: Router) {
+    private createApp() {
         const app = new Koa();
-        app.use(router.routes());
+        app.use(async (ctx, next) => {
+            try {
+                await next();
+            } catch (err) {
+                console.log('uncaught error', err); // tslint:disable-line
+                ctx.redirect('/error');
+            }
+        });
+        app.use(serve(__dirname + '/assets'));
+        app.use(views(__dirname + '/views', {
+            map: {
+                html: 'handlebars',
+            },
+            options: {
+                helpers: {
+                    toDateString: (date: Date) => moment(date).format('DD/MM/YYYY'),
+                },
+            },
+        }));
+        app.use(this.router.routes());
         return app;
     }
 

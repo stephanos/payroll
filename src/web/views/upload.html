@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Wave 0.0.1</title>
+  
+  <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+
+<body>
+  <h2>
+    Upload your Payroll Time Report:
+  </h2>
+
+  <hr/>
+  
+  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/timereport/upload">
+    <input name="report" type="file" />
+    <br/><br/>
+    <input class="btn" type="submit" value="submit"/>
+  </form>
+</body>
+
+</html>

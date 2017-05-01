@@ -48,6 +48,7 @@ class Repository {
     }
 
     public async save(report: ITimeReport) {
+        console.log(`saving report '${report.id}'`); // tslint:disable-line
         const connection = await this.database.getConnection();
         await connection.entityManager.transaction(async (entityManager) => {
             const reportEntity = new TimeReport();

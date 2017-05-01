@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Wave 0.0.1</title>
+
+  <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+
+<body>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Pay Period</th>
+          <th>Amount Paid</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each report.entries}}
+        <tr>
+          <td>{{employeeId}}</td>
+          <td>{{toDateString payPeriod.begin}} - {{toDateString payPeriod.end}}</td>
+          <td>${{amount}}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+</body>
+
+</html>
