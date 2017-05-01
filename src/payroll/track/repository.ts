@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
+import { DuplicateReportError } from './error';
 import { ITimeReport, ITimeReportEntry } from './model';
 
 import { Database } from '../../data/database';
@@ -51,6 +52,10 @@ class Repository {
         console.log(`saving report '${report.id}'`); // tslint:disable-line
         const connection = await this.database.getConnection();
         await connection.entityManager.transaction(async (entityManager) => {
+            if (await entityManager.findOneById(TimeReport, report.id)) {
+                throw new DuplicateReportError(report.id);
+            }
+
             const reportEntity = new TimeReport();
             reportEntity.createdAt = new Date();
             reportEntity.id = report.id;

@@ -11,12 +11,18 @@
 
 <body>
   <h2>
-    Upload your Payroll Time Report:
+    Upload your Time Report:
   </h2>
 
   <hr/>
+
+  {{#if error}}
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+  {{/if}}
   
-  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/timereport/upload">
+  <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/upload">
     <input name="report" type="file" />
     <br/><br/>
     <input class="btn" type="submit" value="submit"/>

@@ -26,9 +26,14 @@ class Router {
             await ctx.render('error');
         });
 
-        router.post('/timereport/upload', upload.single('report'), async (ctx) => {
+        router.post('/upload', upload.single('report'), async (ctx) => {
             const csv = (ctx.req as any).file.buffer.toString('utf-8');
-            await tracker.importCSV(csv);
+            try {
+                await tracker.importCSV(csv);
+            } catch (err) {
+                await ctx.render('upload', { error: err.message });
+                return;
+            }
             ctx.redirect('/report');
         });
 
