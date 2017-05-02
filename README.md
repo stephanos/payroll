@@ -193,32 +193,35 @@ object-oriented design, feel free to dive deeper into the domain model of this
 problem. We're happy to tweak the requirements slightly if it helps you show
 off one of your strengths.
 
-### Documentation:
+## Documentation:
 
-Please modify `README.md` to add:
+### How to run application
 
-1. Instructions on how to build/run your application
-1. A paragraph or two about what you are particularly proud of in your
-   implementation, and why.
+(1) make sure you have Docker 17.0+ installed (you can get it [here](https://store.docker.com/search?type=edition&offering=community)).
 
-## Submission Instructions
+(2) to start the database and app, open a terminal, go into the project's root directory and run:
 
-1. Clone the repository.
-1. Complete your project as described above within your local repository.
-1. Ensure everything you want to commit is committed.
-1. Create a git bundle: `git bundle create your_name.bundle --all`
-1. Email the bundle file to [dev.careers@waveapps.com](dev.careers@waveapps.com)
+```
+./run
+```
 
-## Evaluation
+(alternatively, you can launch a local postgresql database with user `app` and password `app` on localhost:5432 and run `npm i` and `npm start` with Node 7.9+)
 
-Evaluation of your submission will be based on the following criteria.
+(3) once both systems are up, visit http://localhost:3000 to upload a time report, or http://localhost:3000/report to see the salary report directly
 
-1. Did you follow the instructions for submission?
-1. Did you document your build/deploy instructions and your explanation of what
-   you did well?
-1. Were models/entities and other components easily identifiable to the
-   reviewer?
-1. What design decisions did you make when designing your models/entities? Are
-   they explained?
-1. Did you separate any concerns in your application? Why or why not?
-1. Does your solution use appropriate data types for the problem as described?
+
+### What are you proud of? 
+
+I'm proud of the design and the test coverage.
+
+With the design, I tried to separate the concerns as best as I could into 4 modules: 
+web, database, payroll.track and payroll.report. Furthermore, I made sure that the
+dependencies between them are minimal and clearly visible. For example, changes to the 
+time report parser will only affect the payroll reporter when the overall domain changes - 
+and not when an internal implementation detail changes.
+
+This design makes it great to test things, or rather, it was born out of the need to test.
+The actual 'tricky' logic is in easily unit testable classes, while the components that 
+wire things together and have side effects are tested with integration tests. Taking the
+extra mile to setup a database test environment also payed off, since it made it very
+easy and fast to test the interaction with the database (instead of manually testing it).
