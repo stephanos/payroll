@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  postgres:
+    image: sameersbn/postgresql:9.6-2
+    restart: always
+    environment:
+      - DB_NAME=wave
+      - DB_USER=app
+      - DB_PASS=app
+      - PG_TRUST_LOCALNET=true
+    ports:
+      - 5432:5432
+
+  web:
+    image: node:7-onbuild
+    command: /bin/bash -c "npm start"
+    restart: always
+    environment:
+      - DATABASE_HOST=postgres
+    links:
+      - postgres
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
