@@ -7,7 +7,6 @@ import { IPayrollReport, IPayrollReportEntry } from './model';
 class Reporter {
 
     public generate(timeEntries: ITimeReportEntry[]): IPayrollReport {
-        const keys = new Set();
         const payrollMap = new Map<string, IPayrollReportEntry>();
         timeEntries.forEach((timeEntry) => {
             const payment = this.paymentFor(timeEntry.hoursWorked, timeEntry.jobGroup);
@@ -20,10 +19,9 @@ class Reporter {
             };
             entry.amount += payment;
             payrollMap.set(key, entry);
-            keys.add(key);
         });
 
-        const sortedKeys = Array.from(keys.values()).sort();
+        const sortedKeys = Array.from(payrollMap.keys()).sort();
         return { entries: sortedKeys.reduce((acc, key) => acc.concat(payrollMap.get(key)), [])};
     }
 
