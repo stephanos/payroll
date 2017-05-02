@@ -202,8 +202,7 @@ off one of your strengths.
 (2) to start the database and app, open a terminal, go into the project's root directory and run:
 
 ```
-./run
-```
+./run.sh```
 
 (alternatively, you can launch a local postgresql database with user `app` and password `app` on localhost:5432 and run `npm i` and `npm start` with Node 7.9+)
 
@@ -214,7 +213,7 @@ off one of your strengths.
 
 I'm proud of the design and the test coverage.
 
-With the design, I tried to separate the concerns as best as I could into 4 modules: 
+With the design, I tried to separae the concerns as best as I could into 4 modules: 
 web, database, payroll.track and payroll.report. Furthermore, I made sure that the
 dependencies between them are minimal and clearly visible. For example, changes to the 
 time report parser will only affect the payroll reporter when the overall domain changes - 
@@ -224,4 +223,4 @@ This design makes it great to test things, or rather, it was born out of the nee
 The actual 'tricky' logic is in easily unit testable classes, while the components that 
 wire things together and have side effects are tested with integration tests. Taking the
 extra mile to setup a database test environment also payed off, since it made it very
-easy and fast to test the interaction with the database (instead of manually testing it).
+easy and fast to test its integration (instead of doing it manually).
