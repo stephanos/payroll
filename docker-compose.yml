@@ -14,7 +14,7 @@ services:
 
   web:
     image: node:7-onbuild
-    command: /bin/bash -c "npm start"
+    command: /bin/bash -c "npm i && npm start"
     restart: always
     environment:
       - DATABASE_HOST=postgres
