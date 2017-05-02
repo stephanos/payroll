@@ -3,8 +3,7 @@
   "author": "Stephan Behnke",
   "version": "1.0.0",
   "scripts": {
-    "init": "rimraf node_modules && cp -R /app/node_modules .",
-    "check": "npm-run-all build lint test",
+    "check": "npm run lint && npm run test",
     "lint": "tslint 'src/**/*.ts'",
     "start": "ts-node src/index.ts",
     "test": "jest",
@@ -33,7 +32,6 @@
     "@types/pg": "^6.1.39",
     "jest": "^19.0.2",
     "nodemon": "^1.11.0",
-    "npm-run-all": "^4.0.2",
     "pgtools": "^0.2.3",
     "rimraf": "^2.6.1",
     "ts-jest": "^19.0.14",
