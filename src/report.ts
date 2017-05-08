@@ -1,7 +1,0 @@
-class PayrollReport {
-
-
-}
-
-
-export { PayrollReport };
