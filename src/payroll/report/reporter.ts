@@ -9,7 +9,6 @@ class Reporter {
     public generate(timeEntries: ITimeReportEntry[]): IPayrollReport {
         const payrollMap = new Map<string, IPayrollReportEntry>();
         timeEntries.forEach((timeEntry) => {
-            const payment = this.paymentFor(timeEntry.hoursWorked, timeEntry.jobGroup);
             const period = this.periodFor(timeEntry.date);
             const key = `${timeEntry.employeeId}_${period.begin.toISOString()}`;
             const entry: IPayrollReportEntry = payrollMap.get(key) || {
@@ -17,7 +16,10 @@ class Reporter {
                 employeeId: timeEntry.employeeId,
                 payPeriod: period,
             };
+
+            const payment = this.paymentFor(timeEntry.hoursWorked, timeEntry.jobGroup);
             entry.amount += payment;
+
             payrollMap.set(key, entry);
         });
 
